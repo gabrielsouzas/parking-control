@@ -1,44 +1,28 @@
-package com.api.parkingcontrol.models;
+package com.api.parkingcontrol.dtos;
 
-import jakarta.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "TB_PARKING_SPOT")
-public class ParkingSpotModel implements Serializable{
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id; // Identificador único distribuido
-    @Column(nullable = false, unique = true, length = 10)
+public class ParkingSpotDto {
+    
+    @NotBlank
     private String parkingSpotNumber;
-    @Column(nullable = false, unique = true, length = 7)
+    @NotBlank
+    @Size(max = 7)
     private String licensePlateCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String brandCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String modelCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String colorCar;
-    @Column(nullable = false)
-    private LocalDateTime registrationDate;
-    @Column(nullable = false, length = 130)
+    @NotBlank
     private String responsibleName;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String apartment;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String block;
 
-    public UUID getId() {
-        return this.id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getParkingSpotNumber() {
         return this.parkingSpotNumber;
@@ -80,14 +64,6 @@ public class ParkingSpotModel implements Serializable{
         this.colorCar = colorCar;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return this.registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     public String getResponsibleName() {
         return this.responsibleName;
     }
@@ -111,7 +87,5 @@ public class ParkingSpotModel implements Serializable{
     public void setBlock(String block) {
         this.block = block;
     }
-
-
 
 }
