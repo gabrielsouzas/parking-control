@@ -48,6 +48,7 @@ Em cada anotação pode ou não ser passado um ou mais parâmetros, dependendo d
 
 * @Repository - Define que a interface é um repositório, que faz transações com o banco de dados, ao extender a interface com o JpaRepository não tem a necessidade de inserir essa anotação na interface;
 * extends JpaRepository<ParkingSpotModel, UUID> - Define que essa interface carrega todos os métodos do JpaRepository, que possui varios métodos prontos para transações com o banco, como save, update, delete, entre outros.
+* public boolean existsByLicensePlateCar(String licensePlateCar) - Método que verifica se a placa passada pelo cliente já existe no banco de dados. **Importante**: Precisa ser declarado no Repository;
 
 ## ParkingSpotService
 >Classe que faz a camada intermediaria entre o Controller e o Repository.
