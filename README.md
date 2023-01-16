@@ -77,3 +77,31 @@ Em cada anotação pode ou não ser passado um ou mais parâmetros, dependendo d
 
 * @NotBlank - Verifica se a variavel está nula ou vazia;
 * @Size(max = 7) - Define um tamanho máximo de 7 caracteres para a variavel
+
+## Requisições - Postman
+>Descrição de como foram efetuadas as requisições para a API utilizando o Postman.
+
+**Passo a passo:**
+
+1. Baixe e instale o software Postman;
+2. Crie uma conta;
+3. Crie uma Collection (Parking Spot Endpoints);
+4. Dentro da Collection crie as Requisições:
+    * POST - http://localhost:8080/parking-spot
+        * body:
+            ~~~JSON
+                {
+                    "parkingSpotNumber" : "2858",
+                    "licensePlateCar" : "AVF458",
+                    "brandCar" : "Audi",
+                    "modelCar" : "Q5",
+                    "colorCar" : "Black",
+                    "responsibleName" : "Carlos Suarez",
+                    "apartment" : "205",
+                    "block" : "8"
+                }
+            ~~~
+    * GET ALL - http://localhost:8080/parking-spot
+    * GET ONE - http://localhost:8080/parking-spot
+    * DELETE - http://localhost:8080/parking-spot
+    * PUT - http://localhost:8080/parking-spot

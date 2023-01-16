@@ -36,6 +36,21 @@ public class ParkingSpotController {
     // @Valid é necessário para que as validações do Dto sejam feitas
     @PostMapping
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        
+        // Verificações antes de cadastrar um novo registro
+        // Verifica a se a Placa do carro já existe
+        if(parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: License Plate Car is already in use!");
+        }
+        // Verifica se o Númeto da vaga esta em uso
+        if(parkingSpotService.existsByParkingSpotNumber(parkingSpotDto.getParkingSpotNumber())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot is already in use!");
+        }
+        // Verifica se o apartamento e o bloco já estão registrados
+        if(parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot for already registered for this apartment/block!");
+        }
+        
         // Define um objeto do tipo ParkingSpotModel (A partir da JDK 9 - o var identifica o tipo da variavel passada, como no javascript)
         var parkingSpotModel = new ParkingSpotModel();
         // Conversão do Dto passado pelo cliente para Model, que vai para o banco
