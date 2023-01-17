@@ -48,7 +48,7 @@ public class ParkingSpotController {
         }
         // Verifica se o apartamento e o bloco já estão registrados
         if(parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())){
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot for already registered for this apartment/block!");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Parking Spot already registered for this apartment/block!");
         }
         
         // Define um objeto do tipo ParkingSpotModel (A partir da JDK 9 - o var identifica o tipo da variavel passada, como no javascript)
