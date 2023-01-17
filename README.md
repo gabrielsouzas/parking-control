@@ -5,7 +5,7 @@ Projeto desenvolvido com o video [Spring Boot | Curso Completo 2022](https://you
 # Modelagem e Configuração
 
 ## Base de Dados
->A base de dados foi criada com o PostgreSQL:
+>A base de dados foi criada com o PostgreSQL 15.1:
 
 ~~~SQL
 CREATE DATABASE parking-control-db;
@@ -106,3 +106,9 @@ Em cada anotação pode ou não ser passado um ou mais parâmetros, dependendo d
     * GET ONE - http://localhost:8080/parking-spot
     * DELETE - http://localhost:8080/parking-spot
     * PUT - http://localhost:8080/parking-spot
+5. Salve cada uma das requisições;
+6. Suba a aplicação e teste usando o botão **Send**.
+
+**Possíveis erros com as Requisições**
+
+* Ocorreu um erro ao efetuar a validação dos dados, por causa da query enviada ao PostgreSQL na versão 9.3, que não conseguiu interpreta-la. A solução foi atualizar o PostgreSQL para a última versão, a 15.1 até o momento.
