@@ -68,7 +68,7 @@ Em cada anotação pode ou não ser passado um ou mais parâmetros, dependendo d
 * @CrossOrigin - Define que pode ser acessado de qualquer ponto;
 * @RequestMapping - Mapeamento do recurso a nivel de classe;
 * public ParkingSpotController - Ponto de injeção do Service dentro do Controller;
-* @PostMapping - Define o mapeamento do método. Não passa uma URI pois a classe já faz essa tarefa, assim quando o cliente solicitar o método POST da URI parking-spot será direcionado para este método;
+* @PostMapping - Define o mapeamento do método POST. Não passa uma URI pois a classe já faz essa tarefa, assim quando o cliente solicitar o método POST da URI parking-spot será direcionado para este método;
 
 
 ## ParkingSpotDto
@@ -103,9 +103,22 @@ Em cada anotação pode ou não ser passado um ou mais parâmetros, dependendo d
                 }
             ~~~
     * GET ALL - http://localhost:8080/parking-spot
-    * GET ONE - http://localhost:8080/parking-spot
-    * DELETE - http://localhost:8080/parking-spot
-    * PUT - http://localhost:8080/parking-spot
+    * GET ONE - http://localhost:8080/parking-spot/id
+    * DELETE - http://localhost:8080/parking-spot/id
+    * PUT - http://localhost:8080/parking-spot/id
+        * body:
+            ~~~JSON
+                {
+                    "parkingSpotNumber" : "2858",
+                    "licensePlateCar" : "ATR859",
+                    "brandCar" : "BMW",
+                    "modelCar" : "X1",
+                    "colorCar" : "White",
+                    "responsibleName" : "Carlos Suarez",
+                    "apartment" : "205",
+                    "block" : "8"
+                }
+            ~~~
 5. Salve cada uma das requisições;
 6. Suba a aplicação e teste usando o botão **Send**.
 
