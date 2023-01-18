@@ -101,5 +101,41 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body("Parking Spot deleted successfully");
     }
 
-    
+    // Método que atualiza um parkingSpot passando um ID e um body válido no formato JSON com os campos a serem atualizados (parkingSpotDto)
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id, 
+                                                    @RequestBody @Valid ParkingSpotDto parkingSpotDto){
+        Optional<ParkingSpotModel> parkingSpotModelOptional = parkingSpotService.findById(id);
+        if(!parkingSpotModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot not found.");
+        }
+
+        /* Primeiro jeito de atualizar os dados */
+
+        /* Insere os novos dados passados por parametro (parkingSpotDto) nos dados retornados do banco pelo ID (parkingSpotModelOptional) */
+        /*
+        var parkingSpotModel = parkingSpotModelOptional.get();
+        parkingSpotModel.setParkingSpotNumber(parkingSpotDto.getParkingSpotNumber());
+        parkingSpotModel.setLicensePlateCar(parkingSpotDto.getLicensePlateCar());
+        parkingSpotModel.setModelCar(parkingSpotDto.getModelCar());
+        parkingSpotModel.setBrandCar(parkingSpotDto.getBrandCar());
+        parkingSpotModel.setColorCar(parkingSpotDto.getColorCar());
+        parkingSpotModel.setResponsibleName(parkingSpotDto.getResponsibleName());
+        parkingSpotModel.setApartment(parkingSpotDto.getApartment());
+        parkingSpotModel.setBlock(parkingSpotDto.getBlock());
+        */
+
+        /* Segundo jeito de atualizar os dados */
+
+        // Cria uma variavel do Model
+        var parkingSpotModel = new ParkingSpotModel();
+        // Faz a cópia do Dto passado por parametro para o Model
+        BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
+        // Seta o ID retornado do banco que não vai ter alteração
+        parkingSpotModel.setId(parkingSpotModelOptional.get().getId());
+        // Seta a data do registro retornada do banco no ModelOptional que também não será alterada
+        parkingSpotModel.setRegistrationDate(parkingSpotModelOptional.get().getRegistrationDate());
+
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModel));
+    }
 }
