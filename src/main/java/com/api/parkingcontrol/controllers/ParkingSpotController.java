@@ -7,6 +7,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -68,11 +72,16 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.CREATED).body(parkingSpotService.save(parkingSpotModel));
     }
 
-    // Retorna uma listagem de ParkingSpotModel
+    // Retorna uma listagem de ParkingSpotModel sem paginação
+    /* public ResponseEntity<List<ParkingSpotModel>> getAllParkingSpots() */
+
+    // Retorna uma página com a listagem do ParkingSpotModel
+    /* Passa uma anotação de paginação com alguns valores default caso o cliente não envie: size - número de elementos por página, sort - campo que vai ordenar, direction - direção ASCENDENTE ou DESCENDENTE  */
     @GetMapping
-    public ResponseEntity<List<ParkingSpotModel>> getAllParkingSpots(){
+    public ResponseEntity<Page<ParkingSpotModel>> getAllParkingSpots(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable){
         // Aciona o método findAll() no retorno
-        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll());
+        // Passa como parâmetro o pageable para efetuar a paginação
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll(pageable));
     }
 
     // Retorna um ParkingSpotModel (Object) pelo ID (URI: parking-spot/id)
